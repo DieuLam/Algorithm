@@ -10,17 +10,16 @@ import features.UpdateCustomer;
 public class Main {
 
     static MyArrayList<Customer> customerList = new MyArrayList<>();
+    static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
 
         System.out.println("\nLoading data from csv file, please wait...");
 
-        DataHandler.readFile(customerList);  // Loading Phase
-        
+        DataHandler.readFile(customerList); // Loading Phase
+
         while (true) {
 
-            Scanner input = new Scanner(System.in);
-  
             System.out.println("\n\t\t\t\t\t Welcome to Record Management for Intelligent Tracking (RMIT)");
             System.out.println("Menu: ");
             System.out.printf("\n1. Add a new customer\n" +
@@ -44,9 +43,8 @@ public class Main {
                     System.out.println("1. Search for one customer");
                     System.out.println("2. Search for a list of Customer");
                     System.out.print("\nPlease select an option by enter the number: ");
-                    
-                    Scanner input2 = new Scanner(System.in);
-                    int option2 = input2.nextInt();
+
+                    int option2 = input.nextInt();
 
                     if (option2 == 1) {
                         Search.exactSearch(customerList);
@@ -55,6 +53,7 @@ public class Main {
                         Search.partialSearch(customerList);
                         Buffer.buff();
                     }
+
                     break;
 
                 case 4:
@@ -65,7 +64,6 @@ public class Main {
                     System.out.println("Invalid option");
                     System.exit(0);
             }
-            input.close();
         }
     }
 }

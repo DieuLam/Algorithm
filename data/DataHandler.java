@@ -14,12 +14,8 @@ public class DataHandler {
         reader.readLine(); // skip 1st line
         String line = reader.readLine(); // read 2nd line
 
-        int count = 0;  // delete after test
-
         // read each line
         while (line != null) { // still got data after
-
-            System.out.println(count++);  // delete after test
 
             String[] splitData = line.split(",");
             Customer tempCus = new Customer(splitData[0], splitData[1], splitData[2], splitData[3]);
