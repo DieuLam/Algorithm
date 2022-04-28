@@ -1,41 +1,41 @@
 package data;
 
-import java.util.Arrays;
-
 public class MyArrayList<T> {
 
     private Object[] elements;
-    private int size;
+    private int currentElements;
+    private int actualSize;
     // temporary capacity of array when first created
-    private static int DEFAULT_CAPACITY = 10000000; 
+    private static int DEFAULT_CAPACITY = 100; 
     // get rid of unchecked cast trom Object
     @SuppressWarnings("unchecked")
 
     // constructor
     public MyArrayList() {
         elements = (T[]) new Object[DEFAULT_CAPACITY];
-        size = 0;
+        actualSize = DEFAULT_CAPACITY;
+        currentElements = 0;
     }
 
     // method: add element to the last position
     public void add(T obj) {
-        if (size > elements.length) {
+        if (currentElements == elements.length-1) {
             increaseCapa();
         }
-        elements[size] = obj;
-        size++;
+        elements[currentElements] = obj;
+        currentElements++;
     }
 
     // method: add element to a specific position
     public void add(int index, T obj) {
-        if (size == elements.length) {
+        if (currentElements == elements.length-1) {
             increaseCapa();
         }
-        for (int i = size - 1; i > index - 1; i--) {
+        for (int i = currentElements - 1; i > index - 1; i--) {
             elements[i + 1] = elements[i];
         }
         elements[index] = obj;
-        size++;
+        currentElements++;
     }
 
     // get rid of unchecked cast trom Object
@@ -43,7 +43,7 @@ public class MyArrayList<T> {
 
     // method: return element of a specific position
     public T get(int index) throws Exception {
-        if (index < size) {
+        if (index < currentElements) {
             return (T) elements[index];
         } else {
             throw new ArrayIndexOutOfBoundsException();
@@ -52,9 +52,9 @@ public class MyArrayList<T> {
 
     // automatically increase capacity of array when full
     private void increaseCapa() {
-        this.size = this.size + DEFAULT_CAPACITY;
-        Object newData[] = new Object[this.size];
-		for(int i=0; i < elements.length; i++){
+        this.actualSize = this.actualSize + DEFAULT_CAPACITY;
+        Object newData[] = new Object[this.actualSize];
+		for(int i=0; i < elements.length-1; i++){
 			newData[i] = elements[i];
 		}
 		this.elements = newData;
@@ -62,6 +62,6 @@ public class MyArrayList<T> {
 
     // return number of element in arrays, not full capacity
     public int size() {
-        return size;
+        return currentElements;
     }
 }
