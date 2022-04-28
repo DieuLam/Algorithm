@@ -52,8 +52,12 @@ public class MyArrayList<T> {
 
     // automatically increase capacity of array when full
     private void increaseCapa() {
-        int newSize = elements.length * 2;
-        elements = Arrays.copyOf(elements, newSize);
+        this.size = this.size + DEFAULT_CAPACITY;
+        Object newData[] = new Object[this.size];
+		for(int i=0; i < elements.length; i++){
+			newData[i] = elements[i];
+		}
+		this.elements = newData;
     }
 
     // return number of element in arrays, not full capacity
